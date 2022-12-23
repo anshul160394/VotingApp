@@ -1,0 +1,22 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: mysample-scaledobject
+spec:
+  maxReplicaCount: 30
+  idleReplicaCount: 0
+  minReplicaCount: 0
+  pollingInterval: 30
+  scaleTargetRef:
+    name: voting-app-deploy
+  triggers:
+  - type: cron
+    metadata:
+      timezone: Asia/Kolkata
+      start: 00 * * * *
+      end: 06 * * * *
+      desiredReplicas: "4"
+#  - type: memory
+#    metadata:
+#      type: Utilization
+#      value: "60"
