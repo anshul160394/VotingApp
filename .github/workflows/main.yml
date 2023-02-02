@@ -24,4 +24,5 @@ jobs:
     - name: Voting Application Build Image using podman
       run: |
         podman build -t ${{ env.DOCKER_REGISTRY }}/vote:v1 vote/.
-        podman push ${{ env.DOCKER_REGISTRY }} vote:v1
+        podman tag ${{ env.DOCKER_REGISTRY }}/vote:v1 ${{ env.DOCKER_REGISTRY }}/vote:v2
+        podman push ${{ env.DOCKER_REGISTRY }} vote:v2
