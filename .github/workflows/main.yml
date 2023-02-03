@@ -1,4 +1,4 @@
-name: Build and Push Using Podman
+name: Build and Push Docker Image with Podman
 
 on:
   push:
@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  DOCKER_REGISTRY: docker.io/akashkam/podman
+  DOCKER_REGISTRY: docker.io
   DOCKER_USERNAME: akashkam
-
+  DOCKER_REPOSITORY: akashkam/podman
 
 jobs:
   build:
@@ -21,7 +21,21 @@ jobs:
     - name: Login to Docker registry by Podman
       run: |
         podman login  "${{ env.DOCKER_REGISTRY }}" -u "${{ env.DOCKER_USERNAME }}" -p ${{ secrets.DOCKER_PASSWORD }}
-    - name: Voting Application Build Image using podman
+    - name: Voting Application Build Image Using Podman
       run: |
-        podman build -t ${{ env.DOCKER_REGISTRY }}/vote:v1 vote/.
-        podman push ${{ env.DOCKER_REGISTRY }}/vote:v1
+        cd vote/
+        podman build -t vote:v3 .
+        podman push vote:v3 ${{ env.DOCKER_REPOSITORY }}:v3
+        
+    - name: Result Application Build Image Using Podman
+      run: |
+        cd result/
+        podman build -t result:r3 .
+        podman push localhost/result:r3 ${{ env.DOCKER_REPOSITORY }}:r3
+  
+
+    - name: Worker Application Build Image Using Podman
+      run: |
+        cd worker/
+        podman build -t worker:w3 .
+        podman push worker:w3 ${{ env.DOCKER_REPOSITORY }}:w3
