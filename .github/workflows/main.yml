@@ -39,10 +39,14 @@ jobs:
         cd worker/
         podman build -t worker:w3 .
         podman push worker:w3 ${{ env.DOCKER_REPOSITORY }}:w3
-    
-    - name: Azure Kubernetes set context
-      uses: Azure/aks-set-context@v3
+    - name: Azure login
+      id: login
+      uses: azure/login@v1.4.3
       with:
-        creds: "${{ secrets.AZURE_CREDENTIALS }}"
-        resource-group: RG-Containerization2
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Set AKS context
+      id: set-context
+      uses: azure/aks-set-context@v3
+      with:
+        resource-group: RG-Containerization2 
         cluster-name: akscluster-002
