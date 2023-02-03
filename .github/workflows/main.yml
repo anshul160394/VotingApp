@@ -1,9 +1,7 @@
 name: Build and Push Docker Image with Podman
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
+  
 
 env:
   DOCKER_REGISTRY: docker.io
