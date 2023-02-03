@@ -44,13 +44,5 @@ jobs:
       uses: Azure/aks-set-context@v3
       with:
         creds: "${{ secrets.AZURE_CREDENTIALS }}"
-    # Resource Group Name
         resource-group: RG-Containerization2
-    # AKS Cluster Name
         cluster-name: akscluster-002
-    # AKS Cluster Subscription
-        subscription: # optional
-    # Get cluster admin credentials. Values: true or false
-        admin: # optional
-    # Enables kubelogin for non-admin user scenario. Values: true or false
-        use-kubelogin: # optional
