@@ -6,7 +6,7 @@ on: workflow_dispatch
 env:
   DOCKER_REGISTRY: docker.io
   DOCKER_USERNAME: ${{ vars.DOCKERUSER }}
-  DOCKER_REPOSITORY: akashkam/podman
+  DOCKER_REPOSITORY: ${{ vars.DOCKERREPO }}
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
       run: |
         cd vote/
         podman build -t vote:v3 .
-        podman push localhost/vote:v3 ${{ env.DOCKER_REPOSITORY }}:v3
+        podman push localhost/vote ${{ env.DOCKER_REPOSITORY }}
         
     - name: Result Application Build Image Using Podman
       run: |
