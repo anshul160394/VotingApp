@@ -27,14 +27,14 @@ jobs:
       run: |
         cd result/
         podman build -t result:r3 .
-        podman push localhost/result:r3 ${{ env.DOCKER_REPOSITORY }}:r3
+        podman push localhost/result:r3 ${{ secrets.DOCKER_REPOSITORY }}:r3
   
 
     - name: Worker Application Build Image Using Podman
       run: |
         cd worker/
         podman build -t worker:w3 .
-        podman push localhost/worker:w3 ${{ env.DOCKER_REPOSITORY }}:w3
+        podman push localhost/worker:w3 ${{ secrets.DOCKER_REPOSITORY }}:w3
     - name: Azure login
       id: login
       uses: azure/login@v1.4.3
