@@ -5,8 +5,8 @@ on: workflow_dispatch
 
 env:
   DOCKER_REGISTRY: docker.io
-  DOCKER_USERNAME: akashkam
-  DOCKER_REPOSITORY: akashkam/podman
+  DOCKER_USERNAME: ${{ vars.DOCKERUSER }}
+  DOCKER_REPOSITORY: ${{ vars.DOCKERREPO }}
 
 jobs:
   build:
