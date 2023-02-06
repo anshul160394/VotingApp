@@ -44,7 +44,7 @@ jobs:
 
     - name: Configure kubectl
       run: |
-        echo "KUBECONFIG" | base64 --decode > kubeconfig.yaml
+        echo "$KUBECONFIG" | base64 --decode > kubeconfig.yaml
         export KUBECONFIG=kubeconfig.yaml
    
     - name: Test connection to AKS cluster
