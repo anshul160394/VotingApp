@@ -22,20 +22,20 @@ jobs:
       run: |
         cd vote/
         podman build -t vote:v3 .
-        podman push localhost/vote:v3 ${{ secrets.DOCKER_REPOSITORY }}
+        podman push localhost/vote:v1 ${{ secrets.DOCKER_REPOSITORY }}
         
     - name: Result Application Build Image Using Podman
       run: |
         cd result/
         podman build -t result:r3 .
-        podman push localhost/result:r3 ${{ secrets.DOCKER_REPOSITORY }}
+        podman push localhost/result:r1 ${{ secrets.DOCKER_REPOSITORY }}
   
 
     - name: Worker Application Build Image Using Podman
       run: |
         cd worker/
         podman build -t worker:w3 .
-        podman push localhost/worker:w3 ${{ secrets.DOCKER_REPOSITORY }}
+        podman push localhost/worker:w1 ${{ secrets.DOCKER_REPOSITORY }}
         
     - name: Setup kubectl and plugins
       uses: marcofranssen/setup-kubectl@v0.3.0
