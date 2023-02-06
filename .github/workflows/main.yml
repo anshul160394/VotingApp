@@ -23,7 +23,7 @@ jobs:
       run: |
         cd vote/
         podman build -t vote:v3 .
-        podman push vote:v3 ${{ env.DOCKER_REPOSITORY }}:v3
+        podman push localhost/vote:v3 ${{ env.DOCKER_REPOSITORY }}:v3
         
     - name: Result Application Build Image Using Podman
       run: |
@@ -36,7 +36,7 @@ jobs:
       run: |
         cd worker/
         podman build -t worker:w3 .
-        podman push worker:w3 ${{ env.DOCKER_REPOSITORY }}:w3
+        podman push localhost/worker:w3 ${{ env.DOCKER_REPOSITORY }}:w3
     - name: Azure login
       id: login
       uses: azure/login@v1.4.3
