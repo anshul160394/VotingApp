@@ -35,11 +35,12 @@ jobs:
         cd worker/
         podman build -t worker:w3 .
         podman push localhost/worker:w3 ${{ secrets.DOCKER_REPOSITORY }}:w3
-    - name: Azure login
-      id: login
-      uses: azure/login@v1.4.3
+    - name: 'Az CLI login'
+      uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: bc9f50ed-814b-4a3c-b44b-fbc079cc1eca
+        tenant-id: 638456b8-8343-4e48-9ebe-4f5cf9a1997d
+        subscription-id: 95dc6442-7e4b-48c8-8960-9e89c991c067
     - name: Set AKS context
       id: set-context
       uses: azure/aks-set-context@v3
