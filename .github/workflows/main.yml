@@ -36,10 +36,10 @@ jobs:
         podman build -t worker:w3 .
         podman push localhost/worker:w3 ${{ secrets.DOCKER_REPOSITORY }}:w3
         
-    - name: Setup kubectl
-      uses: actions/setup-kubectl@v1
+    - name: Setup kubectl and plugins
+      uses: marcofranssen/setup-kubectl@v0.3.0
       with:
-        version: latest
+        kubectlVersion: latest
 
     - name: Configure kubectl
       run: |
