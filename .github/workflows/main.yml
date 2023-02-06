@@ -5,8 +5,6 @@ on: workflow_dispatch
 
 env:
   DOCKER_REGISTRY: docker.io
-  DOCKER_USERNAME: ${{ vars.DOCKERUSER }}
-  DOCKER_REPOSITORY: ${{ vars.DOCKERREPO }}
 
 jobs:
   build:
@@ -18,12 +16,12 @@ jobs:
 
     - name: Login to Docker registry by Podman
       run: |
-        podman login  "${{ env.DOCKER_REGISTRY }}" -u "${{ env.DOCKER_USERNAME }}" -p ${{ secrets.DOCKER_PASSWORD }}
+        podman login  "${{ env.DOCKER_REGISTRY }}" -u "${{ secrets.DOCKER_USERNAME }}" -p ${{ secrets.DOCKER_PASSWORD }}
     - name: Voting Application Build Image Using Podman
       run: |
         cd vote/
         podman build -t vote:v3 .
-        podman push localhost/vote:v3 ${{ env.DOCKER_REPOSITORY }}
+        podman push localhost/vote:v3 ${{ secrets.DOCKER_REPOSITORY }}
         
     - name: Result Application Build Image Using Podman
       run: |
