@@ -5,6 +5,7 @@ on: workflow_dispatch
 
 env:
   DOCKER_REGISTRY: docker.io
+  KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
 jobs:
   build:
@@ -43,7 +44,7 @@ jobs:
 
     - name: Configure kubectl
       run: |
-        echo "${{ secrets.KUBECONFIG }} " | base64 --decode > kubeconfig.yaml
+        echo "KUBECONFIG" | base64 --decode > kubeconfig.yaml
         export KUBECONFIG=kubeconfig.yaml
    
     - name: Test connection to AKS cluster
