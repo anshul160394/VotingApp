@@ -43,5 +43,14 @@ jobs:
 
     - name: Configure kubectl
       run: |
-        ls
-        
+        echo "${{ secrets.KUBECONFIG }} " | base64 --decode > kubeconfig.yaml
+        export KUBECONFIG=kubeconfig.yaml
+   
+    - name: Test connection to AKS cluster
+      run: |
+        kubectl get nodes
+
+
+
+
+
